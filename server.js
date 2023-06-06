@@ -3,6 +3,7 @@ import morgan from "morgan";
 import { config } from "dotenv";
 import connectDB from "./config/db.js";
 import routes from "./app/routes/index.js";
+import cors from 'cors';
 
 //rest object
 const app = express();
@@ -15,6 +16,7 @@ connectDB();
 
 //middlewares
 app.use(express.json());
+app.use(cors());
 app.use(morgan('dev'));
 
 routes(app);
