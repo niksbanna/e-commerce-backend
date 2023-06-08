@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { create, destroy, index, show, update } from "../controllers/productsController.js";
-export const router = Router();
+import { create, createProductReview, deleteReview, destroy, getProductReviews, index, show, update } from "../controllers/productsController.js";
+import { authoriseRoles, isAuthenticatedUser } from "../../middlewares/auth.js";
+export const productRouter = Router();
 
-router.get('/', index);
-router.get('/:id', show);
-router.post('/create', create);
-router.put('/:id', update);
-router.delete('/:id', destroy);
+productRouter.get('/', index);
+productRouter.get('/:id', show);
+productRouter.get('/reviews', getProductReviews);
+productRouter.get('/reviews', isAuthenticatedUser, deleteReview);
+productRouter.post('/create', isAuthenticatedUser, authoriseRoles("admin"), create);
+productRouter.put('/review', isAuthenticatedUser, createProductReview);
+productRouter.put('/:id', isAuthenticatedUser, authoriseRoles("admin"), update);
+productRouter.delete('/:id', isAuthenticatedUser, authoriseRoles("admin"), destroy);
