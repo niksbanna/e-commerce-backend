@@ -4,15 +4,24 @@ import sendToken from "../../utils/jwtToken.js";
 import sendEmail from "../../utils/sendEmail.js";
 import { User } from "../models/userModel.js";
 import crypto from "crypto";
+import cloudinary from "cloudinary";
 
 // register a user
 export const registerUser = catchAsyncErrors(async (req, res) => {
+
+    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //     folder: "avatars",
+    //     width: 150,
+    //     crop: "scale",
+    // });
+
     const { name, email, password } = req.body;
+
     const user = await User.create({
         name, email, password,
         avatar: {
-            public_id: "public id",
-            url: "url"
+            public_id: "avtar_xkviav",
+            url: "https://res.cloudinary.com/dj8e7u4km/image/upload/v1686288828/avatars/avtar_xkviav.jpg",
         }
     });
 

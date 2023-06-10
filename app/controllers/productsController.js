@@ -56,8 +56,17 @@ export const show = catchAsyncErrors(async (req, res, next) => {
 
 // create a product - Admin
 export const create = catchAsyncErrors(async (req, res) => {
+    const imagesLinks = [];
+    imagesLinks.push({
+        public_id: "macbookjpg_le5xfg",
+        url: "https://res.cloudinary.com/dj8e7u4km/image/upload/v1686290676/avatars/macbookjpg_le5xfg.jpg",
+    });
+
+    req.body.images = imagesLinks;
     req.body.user = req.user.id;
+
     const product = await Product.create(req.body);
+
     res.status(201).json(
         {
             success: true,

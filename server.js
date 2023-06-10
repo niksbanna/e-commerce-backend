@@ -6,6 +6,9 @@ import routes from "./app/routes/index.js";
 import cors from 'cors';
 import errorMiddleware from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
+import cloudinary from "cloudinary";
+import fileUpload from "express-fileupload";
+import bodyParser from "body-parser";
 
 // handling uncaught exception
 process.on('uncaughtExceptionMonitor', (err) => {
@@ -24,11 +27,23 @@ config();
 //database config
 connectDB();
 
+//cloudinary config
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
 //middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 routes(app);
 

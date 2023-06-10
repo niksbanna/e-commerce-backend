@@ -1,6 +1,5 @@
 import { Order } from "../models/orderModel.js";
 import catchAsyncErrors from "../../middlewares/catchAsyncErrors.js";
-import ApiFeatures from "../../utils/apiFeatures.js";
 import ErrorHandler from "../../utils/errorhandler.js";
 import { Product } from "../models/productModel.js"
 
