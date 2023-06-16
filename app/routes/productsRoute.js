@@ -4,8 +4,8 @@ import { authoriseRoles, isAuthenticatedUser } from "../../middlewares/auth.js";
 export const productRouter = Router();
 
 productRouter.get('/', index);
-productRouter.get('/:id', show);
 productRouter.get('/reviews', getProductReviews);
+productRouter.get('/:id', show);
 productRouter.get('/admin/products', getAdminProducts);
 productRouter.delete('/reviews', isAuthenticatedUser, deleteReview);
 productRouter.post('/create', isAuthenticatedUser, create);

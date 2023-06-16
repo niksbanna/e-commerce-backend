@@ -155,7 +155,6 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
 // Get All Reviews of a product
 export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
     const product = await Product.findById(req.query.id);
-
     if (!product) {
         return next(new ErrorHandler("Product not found", 404));
     }

@@ -19,7 +19,7 @@ process.on('uncaughtExceptionMonitor', (err) => {
 })
 
 //rest object
-const app = express();
+export const app = express();
 
 // configure env
 config();
